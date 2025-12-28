@@ -19,9 +19,17 @@ authenticated.post('/login', (req, res) => {
 
 // Add or update review
 authenticated.put('/review/:isbn', (req, res) => {
-  books[req.params.isbn].reviews["user"] = req.body.review;
-  res.json({ message: "Review added" });
+  const isbn = req.params.isbn;
+  const review = req.body.review;
+
+  books[isbn].reviews["sai"] = review;
+
+  res.json({
+    message: "Review added",
+    reviews: books[isbn].reviews
+  });
 });
+
 
 // Delete review
 authenticated.delete('/review/:isbn', (req, res) => {
